@@ -1,9 +1,10 @@
 using UnityEngine;
 using Cosmos.InGame.Enemy;
+using Cosmos.InGame.System;
 
 namespace Cosmos.InGame.Bullet
 {
-    public abstract class BulletBase : MonoBehaviour
+    public abstract class BulletBase : MonoBehaviour, IScreenOut
     {
         [SerializeField, Min(0)]
         private float _moveSpeed = 1f;
@@ -16,14 +17,16 @@ namespace Cosmos.InGame.Bullet
 
         public float NextFireTime => _nextFireTime;
 
+        public GameObject SelfObject => transform.gameObject;
+
+        public void Awake()
+        {
+            ScreenOutChecker.Instance.AddCheckObject(this);
+        }
+
         private void Update()
         {
             Move();
-
-            if (CheckScreenOut())
-            {
-                Destroy(gameObject);
-            }
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -43,25 +46,6 @@ namespace Cosmos.InGame.Bullet
         /// 移動処理
         /// </summary>
         public abstract void Move();
-
-        /// <summary>
-        /// 弾がカメラの範囲外に出たかどうか判定する
-        /// </summary>
-        /// <returns></returns>
-        private bool CheckScreenOut()
-        {
-            Vector3 viewPosition = Camera.main.WorldToViewportPoint(transform.position);
-
-            bool xCheck = viewPosition.x < -0.0f || viewPosition.x > 1.0f; //x軸がカメラの範囲外かチェック
-            bool yCheck = viewPosition.y < -0.0f || viewPosition.y > 1.0f; //y軸がカメラの範囲外かチェック
-
-            if (xCheck || yCheck)  //カメラの範囲外
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }
 

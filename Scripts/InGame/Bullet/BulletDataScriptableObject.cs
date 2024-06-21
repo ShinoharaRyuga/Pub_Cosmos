@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+
 
 namespace Cosmos.InGame.Bullet
 {
@@ -23,7 +25,7 @@ namespace Cosmos.InGame.Bullet
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class BulletData
     {
         [SerializeField]

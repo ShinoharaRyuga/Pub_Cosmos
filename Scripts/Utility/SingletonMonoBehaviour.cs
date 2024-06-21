@@ -18,7 +18,7 @@ namespace Cosmos.Utility
                     instance = (T)FindObjectOfType(t);
                     if (!instance)
                     {
-                        Debug.LogError(t + " is nothing.");
+                        Debug.LogError(t + "ВЌСґНЁВµВ№ВєВс");
                     }
                 }
                 return instance;
