@@ -4,7 +4,7 @@ using Cosmos.InGame.System;
 
 namespace Cosmos.InGame.Bullet
 {
-    public abstract class BulletBase : MonoBehaviour, IScreenOut
+    public abstract class BulletBase : MonoBehaviour, IRangeOut
     {
         [SerializeField, Min(0)]
         private float _moveSpeed = 1f;
@@ -21,7 +21,7 @@ namespace Cosmos.InGame.Bullet
 
         public void Awake()
         {
-            ScreenOutChecker.Instance.AddCheckObject(this);
+            RangeOutChecker.Instance.AddCheckObject(this);
         }
 
         private void Update()
@@ -35,6 +35,7 @@ namespace Cosmos.InGame.Bullet
             {
                 if (!_isPerforate)  //íeÇçÌèúÇ∑ÇÈÇ©Ç«Ç§Ç©
                 {
+                    RangeOutChecker.Instance.RemoveCheckObject(this);
                     Destroy(gameObject);
                 }
 

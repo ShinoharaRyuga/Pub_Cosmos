@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Cosmos.InGame.System
 {
-    public interface IScreenOut
+    public interface IRangeOut
     {
         GameObject SelfObject { get; }
     }
